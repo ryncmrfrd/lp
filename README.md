@@ -6,8 +6,8 @@
 ## How to Install
 
 This is the easiest bit.  
-__Step 1 -__ Download the extenxion from [this](https://github.com/ryncmrfrd/lp/extention/master/EP%20Auto%20Answerer.crx) github link.  
-__Step 2 -__ Install the extenxion onto Chrome from the [extentions page](chrome://extentions). Enable developer mode by toggling the switch in the top-right corner, then click on `Load Unpacked`, then navigate to the location of the downloaded folder. Boom, done :thumbsup:.  
+__Step 1 -__ Download the extension from [this](https://github.com/ryncmrfrd/lp/archive/master.zip) github link.  
+__Step 2 -__ Install the extension onto Chrome from the [extensions page](chrome://extensions). Enable developer mode by toggling the switch in the top-right corner, then click on `Load Unpacked`, then navigate to the __/extention__ subfolder of the downloaded folder. Boom, done :thumbsup:.  
   
 > I am working on getting the extention onto the Chrome Web store so all of this install business is unnecessary, but until then this is the best I can do. Sorry :(.
 
@@ -18,8 +18,6 @@ When you go onto a `*www.educationperfect.com/app*game?mode=0*` (the * 's being 
 ```javascript
 if (document.getElementById("question-text").childNodes.length > 1) var transText = document.getElementById("question-text").childNodes[1].innerText;
 else var transText = document.getElementById("question-text").childNodes[0].innerText;
-// ⬇ just for this demo ⬇
-console.log(transText);
 ```
 
 Then, because chrome doesn't like injected XMLHttpRequests, the injected script then sends a message to the [script](https://github.com/ryncmrfrd/lp/blob/master/extention/js/app.js) running in the [popup window](https://github.com/ryncmrfrd/lp/blob/master/extention/popup.html), which can make XMLHttpRequests. It also sends a message containing the URL, so the popup can validate whether the URL is supported.
