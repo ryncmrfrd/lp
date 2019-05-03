@@ -1,0 +1,17 @@
+{
+  "name": "EP Auto Answer",
+  "version": "1.0",
+  "manifest_version": 2,
+  "description": "Auto translate your homework. Yes, really.",
+  "homepage_url": "http://ryncmrfrd.me/#things",
+  "browser_action": {
+    "default_title": "Translate",
+    "default_popup": "popup.html",
+    "default_icon": {
+        "32": "img/favicon.png"
+    }
+  },
+  "permissions": [
+    "activeTab"
+  ]
+}
