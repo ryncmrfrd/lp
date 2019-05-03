@@ -21,7 +21,7 @@ window.onload = function(){
 						document.querySelector("#toLang").innerHTML = response.lang.split("-")[1]
 					}
 				};
-			xhttp.open("GET", "https://translate.yandex.net/api/v1.5/tr.json/translate?key=trnsl.1.1.20181030T063621Z.0a45b8efb2e70388.6bcd8348dc80843bb85d58bc85e8cd90c112b557&text="+request.source+"&lang=en", true);
+			xhttp.open("GET", "https://translate.yandex.net/api/v1.5/tr.json/translate?key=trnsl.1.1.20181030T063621Z.0a45b8efb2e70388.6bcd8348dc80843bb85d58bc85e8cd90c112b557&text="+request.transText+"&lang=en", true);
 			xhttp.send();
 		}
 	
