@@ -1,26 +1,24 @@
-# Education Perfect Auto Answerer
-[Education Perfect](http://https://educationperfect.com) is a language learning platform. My French teacher gives the class a lot of homework on there, and I'm not the biggest fan of homework, so I built an auto-answering chrome extension.  
+# 📌 Achive Notice
+This repo has been archived as a record of the things I made when I was learning to code throughout highschool. 
+Read on for a quick guide and retrospective, otherwise you can check out my current projects on my website.
 
-![EP Logo](https://www.educationperfect.com/wp-content/uploads/2019/02/logo-horiz-1.png "EP Logo")
+# 🌎 Language Perfect Auto Answerer
 
-## How to Install
+**Quick note before I start, around the time I was writing this extension Language Perfect renamed themselves to Education Perfect, but I thought it was worth preserving the original repository name and description, so we'll continue to use Language Perfect here.**
 
-This is the easiest bit.  
-__Step 1 -__ Download the extension from [this](https://github.com/ryncmrfrd/lp/archive/master.zip) github link.  
-__Step 2 -__ Install the extension onto Chrome from the [extensions page](chrome://extensions). Enable developer mode by toggling the switch in the top-right corner, then click on `Load Unpacked`, then navigate to the __/extention__ subfolder of the downloaded folder. Boom, done :thumbsup:.  
-  
-> I am working on getting the extention onto the Chrome Web store so all of this install business is unnecessary, but until then this is the best I can do. Sorry :(.
+> "[Language Perfect](https://www.educationperfect.com/) is a language learning platform. My French teacher gives the class a lot of homework on there, and I'm not the biggest fan of homework, so I built an auto-answering Chrome Extension." - Original Readme, 2019
 
-## How It Works (after Installation)
+That's how I phrased it at the time, and honestly I stand by it. This extension, aimed at automatically translating a question and displaying the correct answer for me, was my second Chrome Extension aimed at making my life a little easier. It marks my first use of a public API in connecting two services together in a way neither of them probably intended, and my first proper README, with a breakdown of the code block by block. Below this you'll find the "How It Works" section I originally wrote for the project, with a few readability edits.
 
-When you go onto a `*www.educationperfect.com/app*game?mode=0*` (the * 's being wildcards) URL, the an injected script [(inject.js)](https://github.com/ryncmrfrd/lp/blob/master/extention/js/inject.js) reads the value of the text to be translated.
+## 💻 How It Works
+When you navigate to a website matching the expression `*www.educationperfect.com/app*game?mode=0*` (the * 's being wildcards) the injected script (inject.js) begins the auto-answering process by reading the value of the text to be translated from the HTML element containing it.
 
 ```javascript
 if (document.getElementById("question-text").childNodes.length > 1) var transText = document.getElementById("question-text").childNodes[1].innerText;
 else var transText = document.getElementById("question-text").childNodes[0].innerText;
 ```
 
-Then, because chrome doesn't like injected XMLHttpRequests, the injected script then sends a message to the [script](https://github.com/ryncmrfrd/lp/blob/master/extention/js/app.js) running in the [popup window](https://github.com/ryncmrfrd/lp/blob/master/extention/popup.html), which can make XMLHttpRequests. It also sends a message containing the URL, so the popup can validate whether the URL is supported.
+Then, because Chrome doesn't like injected `XMLHttpRequests` for security reasons, the injected script sends a message to app.js, running in the popup window (popup.html). It also sends a message containing the URL, so the popup can validate it for the correct domain, path, and query.
 
 ```javascript
 chrome.runtime.sendMessage({
@@ -29,7 +27,7 @@ chrome.runtime.sendMessage({
 });
 ```
 
-From here, the translating and UI is taken care of by [app.js](https://github.com/ryncmrfrd/lp/blob/master/extention/js/app.js), which really begins with an `onMessage` event listener. As soon as the message from [inject.js](https://github.com/ryncmrfrd/lp/blob/master/extention/js/inject.js) is recieved, the page is deemed either "supported" or not:
+From here, the translating and UI is taken care of by app.js, beginning with an `onMessage` event listener, triggered when the runtime message is received. Once the message is received, the page is deemed either supported, or not:
 
 ```javascript
 if(request.url) {
@@ -40,7 +38,7 @@ if(request.url) {
 }
 ```
 
-Then, the translation text we gathered earlier is sent to [Yandex Translate](https://tech.yandex.com/translate/), entirely because you have to pay to use Google Translate :triumph:. After translation, the results are displayed in the __From__ and __To__ sections of the popup.
+Then, the translation text gathered earlier is sent to [Yandex Translate](https://tech.yandex.com/translate/), entirely because you have to pay to use the Google Translate API 😢. After translation, the results are displayed in the __To__ and __From__ sections of the popup.
 
 ```javascript
 if(request.transText) {
@@ -60,6 +58,5 @@ if(request.transText) {
 
 ```
 
-And that's how the EP Auto Answerer chrome extention works. If you made it all the way to this point, thanks for dealing with my poor documentation skills.
-
-## View my other stuff at [ryncmrfrd.me](https://ryncmrfrd.me)
+And that's how the LP Auto Answerer works! If you made it all the way to this point, thanks for dealing with my poor documentation skills.
+> And a final footnote - don't worry past Ryan, you did great - your documentation skills aren't half bad! 🏆
